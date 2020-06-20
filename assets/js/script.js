@@ -22,17 +22,19 @@ for (i=0; i < buttons.length; i++) {
             e.target.dataset.turnable = "false";
 
             e.target.textContent = e.target.dataset.number;
-            e.target.style.backgroundColor ='orange';
+            e.target.style.backgroundColor ="orange";
 
-            lastKnownButtonId = e.target.dispatchEvent;
+            lastKnownButtonId = e.target.id;
             lastKnownButtonNumber = e.target.dataset.number;
         }
 
         //second click
         else if (wait="false" && lastKnownButtonId !== undefined && lastKnownButtonNumber !== undefined && turnable == "true" && e.target.id != lastKnownButtonId) {
             e.target.dataset.turnable = "false";
+            
             e.target.textContent = e.target.dataset.number;
 
+            
             //match
             if(e.target.dataset.number == lastKnownButtonNumber) {
                 e.target.style.backgroundColor ='green';
@@ -40,21 +42,19 @@ for (i=0; i < buttons.length; i++) {
 
                 lastKnownButtonId = undefined;
                 lastKnownButtonNumber = undefined;
-
                 matches++;
 
                 if(matches == 8) {
                     showWinScreen();
                 }
-            }
 
             //no match           
-            else {
+            } else {
                 document.getElementById(lastKnownButtonId).style.backgroundColor = "red";
                 e.target.style.backgroundColor = "red";  
                 wait = "true";
 
-                setTimeout() {
+                 setTimeout(() {
                     e.target.dataset.turnable ="true";
                     e.target.style.backgroundColor ="white";
                     e.target.textContent ="";
@@ -67,10 +67,11 @@ for (i=0; i < buttons.length; i++) {
 
                     lastKnownButtonId = undefined;
                     lasttKnownButtonNumber = undefined;
-                    wait = false;
+                    wait = "false";
                 }, 1000);
                 
                 } 
+
             }
         }
     });
